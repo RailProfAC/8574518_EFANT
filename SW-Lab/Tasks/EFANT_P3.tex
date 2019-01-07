@@ -1,0 +1,122 @@
+\documentclass[11pt,a4paper,headsepline]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage[scaled]{helvet}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{textcomp}
+\usepackage{pdflscape} 
+\usepackage{marvosym}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage[siunitx,european,cuteinductors,smartlabels]{circuitikz}
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage{sansmath}
+\usetikzlibrary{shapes.geometric}
+\usepackage{wasysym}
+\usepackage[nix]{optional}
+\usepackage{listings}
+\lstset{
+commentstyle=\color{green!50!black}}
+
+\usetikzlibrary{calc}
+
+
+%\theoremstyle{definition}
+\newtheorem{aufgabe}{Aufgabe}
+\newtheorem{loesung}{L\"osung}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\D}{\operatorname{d}}
+\newcommand{\mum}{\operatorname{\mu m}}
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\var}{\operatorname{var}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\rg}{\operatorname{rg}}
+
+
+
+\renewcommand*\familydefault{\sfdefault}
+%\renewcommand{\arraystretch}{1.1}
+
+
+\KOMAoptions{parskip=half,DIV=15,fontsize=11pt}
+\unitlength1cm
+\newif\ifuelsg %als slides
+%\uelsgtrue
+\uelsgfalse
+\newif\ifnotuelsg
+\ifuelsg\notuelsgfalse\else\notuelsgtrue\fi
+
+\title{Praktikum ``Zustandsregelung''}
+\date{}
+\makeatletter
+\let\Title\@title
+\let\Author\@author
+\makeatother
+\pagestyle{fancy}
+\fancyhead[L]{Prof. Dr. Raphael Pfaff}
+\fancyhead[R]{85745: Energieeffiziente Antriebsregelung}
+\fancyfoot[L]{Datei: \jobname}
+\fancyfoot[R]{Datum: \today
+\begin{picture}(0,0)(0,0)\put(.5,0){\includegraphics[height=5cm]{fh_logo}}\end{picture}}
+
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+\vspace{-2cm}
+% \hyphenation{Abwei-chungen}
+
+\begin{aufgabe}[Zustandsregelung mit Luenberger-Beobachter in Simulink/Scicos]
+\label{Task:Luenberger}
+Erg\"anzen Sie das System-Modell aus dem zweiten Praktikum um einen Zustandsregler basierend auf den gesch\"atzten Zust\"anden. Beachten Sie folgende Punkte:
+\begin{itemize}
+	\item Basis der Sch\"atzung ist das Ausgangssignal des Beobachters
+	\item Zeichnen Sie folgenden Gr\"o{\ss}en auf:
+	\begin{itemize}
+		\item Eingangssignal in das System (die Regelstrecke) $u$
+		\item Wahre Zust\"ande $x_{1}$, $y_{0} = x_{2}$
+		\item Gesch\"atzte Zust\"ande $\hat{x}_{1}$, $\hat{x}_{2}$
+		\item Gemessenes (verrauschtes) Ausgangssignal $y_{n}$
+		\item Sollwertvorgabe $r$
+	\end{itemize}
+	\item Stellen Sie in je einem Plot gegen\"uber:
+	\begin{itemize}
+		\item $u$, $y_{0}$, $y_{n}$, $r$
+		\item $x_{1}$, $\hat{x}_{1}$
+		\item $x_{2}$, $\hat{x}_{2}$
+		\end{itemize}
+	\item W\"ahlen Sie $K = \left(1 \quad 0{,}1\right)^T$
+\end{itemize}
+\begin{center}
+\includegraphics[width = 0.7\textwidth]{P31Output}
+\end{center}
+\end{aufgabe}
+
+\opt{loesung}{
+\newpage
+\begin{loesung}[Skript zur L\"osung der Aufgabe \ref{Task:Luenberger}] $ $ \\
+\lstinputlisting[language=Scilab]{../Solutions/SolutionP3.sce}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width = 0.9\textwidth]{P3Scicos}
+\caption{XCos Blockdiagramm}
+\label{default}
+\end{center}
+\end{figure}
+\end{loesung}
+}
+
+
+\end{document}

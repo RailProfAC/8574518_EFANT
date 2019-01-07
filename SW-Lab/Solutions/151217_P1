@@ -1,0 +1,57 @@
+[u,t,n]=file();[path,fname,ext]=fileparts(n($-2));cd(path);
+clear
+clc
+clearglobal
+xdel(winsid());
+clear;
+stacksize('max');
+mode(2);
+
+
+//*************
+//Aufgabe 1
+s = syslin('c',poly(0,'s'),1);
+//s=poly(0,'s');
+G= (3 + s)/(10+1.1*s+s^2)
+//G= (3 + s)/(10-0.1*s+s^2)
+
+Sys = tf2ss(G);
+//ss2tf(Sys)
+t=0:0.025:25;
+ystep = csim ('step', t, Sys);
+plot(t,ystep)
+
+
+//*************
+//Aufgabe 2
+close
+//Steuerbarkeitsmatrix
+//Zustandssteuerbarkeit rg[B, AB, ..., A^(n-1)B)] = n
+Cont = rank([Sys.B Sys.A*Sys.B])
+//Ausgangssteuerbarkeit
+ContU = rank([Sys.C*Sys.B, Sys.C*Sys.A*Sys.B])
+//Beobachtbarkeitsmatrix rg(C, CA, ..., C*A^(n-1) = n)
+Obs = rank([Sys.C' (Sys.C*Sys.A)'])
+
+// Aufgabe 3
+// Auf globale Variable umspeichern
+A = Sys.A;
+// Funktion zur Berechnung der Steigung
+function xv=xdot(t, x)
+    xv = A*x;
+endfunction
+// Bereich und Aufloesung
+x1 = -1:0.2:1; x2 = -1:0.2:1;
+// System-Trajektorie
+
+
+// Plot
+scf(2)
+fchamp(xdot, 0, x1, x2, arfact = 0.7);
+[ytra, xtra] = csim(zeros(t), t, Sys, rand(2,1))
+plot2d(xtra(1,:), xtra(2,:), 2)
+a = gca();
+a.isoview = 'on'; 
+a.x_location = "origin";
+a.y_location = "origin";
+
