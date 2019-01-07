@@ -1,23 +1,23 @@
-# 8574518 EFANT
+# Energieeffiziente Antriebsregelung (Modul 8574518 EFANT) - Teil Regelung im Zustandsraum
 
 ## Lernziele
 
-### Teil 1:
+### Teil 1
 
 - Die Studierenden kennen die Zustandsraumbeschreibung, die Bedeutung von Polstellen und die Begriffe Steuerbarkeit und Beobachtbarkeit.
-- Die Studierenden kennen die Normalformen der Zustandsbeschreibung und zugeh\"orige Blockdiagramme.
-- Die Studierenden kennt die Blockdiagramme und resultierenden Systemmatrizen der Regelung im Zustandsraum sowie den Unterschied zwischen Zustan- und Ausgangsr\"uckf\"uhrung.
+- Die Studierenden kennen die Normalformen der Zustandsbeschreibung und zugehörige Blockdiagramme.
+- Die Studierenden kennt die Blockdiagramme und resultierenden Systemmatrizen der Regelung im Zustandsraum sowie den Unterschied zwischen Zustan- und Ausgangsrückführung.
 
-### Teil 2:
+### Teil 2
 
-- Die Studierenden kennen Sch\"atzfunktionen und deren w\"unschenswerte Eigenschaften.
-- Die Studierenden kennen den grunds\"atzlichen Aufbau der Prediction Error Methods (PEM) und ihre Eigenschaften.
-- Die Studierenden k\"onnen den Kalman Filter als Zustandssch\"atzer sowie den RLS a\"ls Parametersch\"atzer anwenden und ihre Grenzen aufzeigen.
+- Die Studierenden kennen Schätzfunktionen und deren wünschenswerte Eigenschaften.
+- Die Studierenden kennen den grundsätzlichen Aufbau der Prediction Error Methods (PEM) und ihre Eigenschaften.
+- Die Studierenden können den Kalman Filter als Zustandsschätzer sowie den RLS als Parameterschätzer anwenden und ihre Grenzen aufzeigen.
 
-### Teil 3 (Rechnerpraktikum/Selbststudium):
+### Teil 3 (Rechnerpraktikum/Selbststudium)
 
-- Die Studierenden k\"onnen dynamische Systeme im Zustandsraum simulieren.
-- Die Studierenden k\"onnen Zustan- und Parametersch\"atzer in Scicos oder C implementieren.
+- Die Studierenden können dynamische Systeme im Zustandsraum simulieren.
+- Die Studierenden können Zustan- und Parameterschätzer in Scicos oder C implementieren.
 
 ### Struktur des Kurses
 
