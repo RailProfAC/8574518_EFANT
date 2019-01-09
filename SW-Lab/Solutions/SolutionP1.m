@@ -6,7 +6,7 @@ global A
 %% Task 1
 % System equations
 b = [1 3];
-a = [1 1.1 10];
+a = [1 0 1];
 % Transfer function model to check
 systf = tf([1 3],[1 1.1 10])
 % Convert to state space
@@ -32,11 +32,12 @@ x1 = linspace(-1, 1, res);
 x2 = linspace(-1, 1, res);
 [X1, X2] = meshgrid(x1,x2);
 x = [reshape(X1, [1, res*res]);reshape(X2, [1, res*res])];
-y = xdot(x);
-% System Trajektory
+y = xdot(x); %A*x
+% System Trajectory
 t = linspace(0,10);
 [ytra, t, xtra] = lsim(sys, zeros(size(t)), t, rand(2,1));
 % Plot
+figure
 quiver(X1, X2, reshape(y(1,:), [res,res]), reshape(y(2,:), [res, res]));
 hold on
 plot(xtra(:,1), xtra(:,2))
@@ -45,17 +46,18 @@ axis equal
 %% Task 4
 % System parameters
 a0 = 1;
-a1 = 0.2;
+a1 = 0.5;
 b0 = 1;
 
 % Input signal
 n = 500;
-tmax = 10;
+tmax = 30;
 simin.time = linspace(0,tmax,n);
 simin.signals.values= [ones(1,n)'];
 var.signals.dimensions=[n,1];
 
 sim('SolutionP145.slx')
+figure
 plot(simout.time, simout.Data)
 legend('u', 'x_1', 'x_2')
 
