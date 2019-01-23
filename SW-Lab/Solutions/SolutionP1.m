@@ -56,7 +56,7 @@ simin.time = linspace(0,tmax,n);
 simin.signals.values= [ones(1,n)'];
 var.signals.dimensions=[n,1];
 
-sim('SolutionP145.slx')
+sim('SolutionP145.mdl')
 figure
 plot(simout.time, simout.Data)
 legend('u', 'x_1', 'x_2')
