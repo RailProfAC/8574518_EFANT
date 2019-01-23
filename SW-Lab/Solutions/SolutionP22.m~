@@ -19,13 +19,18 @@ L = [.2; .1];
 n = 500;
 tmax = 30;
 simin.time = linspace(0,tmax,n);
-simin.signals.values= idinput(n,'sine', [1 5]);
+simin.signals.values= idinput(n,'prbs');
 noise.time = linspace(0,tmax,n);
-noise.signals.values= [0.05*randn(n,1)];
+noise.signals.values= [0.5*randn(n,1)];
 var.signals.dimensions=[n,1];
-
+% Run Simulink-File
 sim('SolutionP2.mdl')
+
 figure
-plot(simout.time, simout.Data)
-legend('u', 'x_1', 'x_2', 'x_{1,hat}', 'x_{2,hat}')
+subplot(311)
+plot(simout.time, simout.Data(:,[1,2,6]))
+legend('u', 'y_0', 'y_n')
+subplot(311)
+plot(simout.time, simout.Data(:,[3,4]))
+legend('x_1', 'x_2', 'x_{2,hat}', 'x_{1,hat}')
 

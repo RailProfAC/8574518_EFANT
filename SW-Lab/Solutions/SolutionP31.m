@@ -14,22 +14,24 @@ B = [b0; 0];
 C = [0 1];
 %Luenberger observer matrix
 L = [.2; .1];
+% Controler gain
+K = 1*[1,.1];
 
 % Input signal
 n = 500;
 tmax = 30;
 simin.time = linspace(0,tmax,n);
-simin.signals.values= idinput(n,'prbs');
+simin.signals.values= [zeros(n/5,1); ones(n/5,1); zeros(n/5,1); -1*ones(n/5,1); zeros(n/5,1)];
 noise.time = linspace(0,tmax,n);
 noise.signals.values= [0.5*randn(n,1)];
 var.signals.dimensions=[n,1];
 % Run Simulink-File
-sim('SolutionP2.mdl')
+sim('SolutionP3.slx')
 
 figure
 subplot(311)
-plot(simout.time, simout.Data(:,[1,2,6]))
-legend('u', 'y_0', 'y_n')
+plot(simout.time, simout.Data(:,[1,2,6,7]))
+legend('u', 'y_0', 'y_n', 'r')
 subplot(312)
 plot(simout.time, simout.Data(:,[2,5]))
 legend('x_1','x_{1,hat}')
