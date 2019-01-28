@@ -15,7 +15,9 @@ C = [0 1];
 %Luenberger observer matrix
 L = [.2; .1];
 % Controler gain
-K = 1*[1,.1];
+K = 2*[-.1,1];
+
+eig(A-B*K)
 
 % Input signal
 n = 500;
