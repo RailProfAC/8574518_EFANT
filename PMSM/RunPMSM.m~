@@ -1,0 +1,24 @@
+%% Prepare
+clear all, close all, clc
+
+
+%% Run PMSM
+% System parameters
+R1 = 100;
+L1q = 0.1;
+L1d = 0.1;
+psi = 1;
+p = 1;
+
+% Input signal
+n = 500;
+tmax = 30;
+simin.time = linspace(0,tmax,n);
+simin.signals.values= [ones(1,n)'];
+var.signals.dimensions=[n,1];
+
+sim('SolutionP145.mdl')
+figure
+plot(simout.time, simout.Data)
+legend('u', 'x_1', 'x_2')
+
