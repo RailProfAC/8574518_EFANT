@@ -6,13 +6,15 @@ global A
 %% Task 1
 % System equations
 b = [1 3];
-a = [1 0 1];
+a = [1 .5 1];
 % Transfer function model to check
-systf = tf([1 3],[1 1.1 10])
+systf = tf([1 3],[1 20 1])
 % Convert to state space
 [A,B,C,D] = tf2ss(b,a);
 
 sys = ss(A,B,C,D)
+figure
+step(sys, 20)
 
 %% Task 2
 % Rank of controllability and observability matrices
@@ -27,7 +29,7 @@ A = sys.A;
 xdot = @(x) A*x;
 
 % Range and resolution
-res = 11;
+res = 21;
 x1 = linspace(-1, 1, res);
 x2 = linspace(-1, 1, res);
 [X1, X2] = meshgrid(x1,x2);
