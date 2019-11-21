@@ -1,7 +1,8 @@
-\documentclass[slidestop,compress,mathserif]{beamer}
-\usepackage[bars]{beamerthemetree} % Beamer theme v 2.2
-\usetheme{Madrid} % Beamer theme v 3.0
-\usecolortheme{seagull} % Beamer color theme
+\documentclass[slidestop,compress,mathserif, aspectratio = 169]{beamer}
+%\usecolortheme{seagull} % Beamer color theme
+\usetheme{metropolis}
+%\usepackage{helvet}
+\useinnertheme{rectangles}
 \usepackage{bibentry}
 \usepackage{graphicx}
 \usepackage{epigraph}
@@ -45,9 +46,23 @@
 \newcommand{\Id}{\operatorname{Id}}
 \newcommand{\rg}{\operatorname{rg}}
 
-\newcommand{\offslide}[2]{\frame{\frametitle{ \includegraphics[scale=0.01] {Off}\hspace{1.5mm} #1}
-\framesubtitle{#2}
-}}
+\graphicspath{{../../figures/}}
+
+
+
+\newcommand{
+\offslide}[2]{
+\begin{frame}
+\frametitle{\includegraphics[scale=0.05] {Offwhite} \hspace{.5mm} #1}
+%\framesubtitle{#2}
+\begin{tikzpicture}[x=1cm, y=1cm, semitransparent]
+\draw[step=5mm, line width=0.2mm, black!40!white] (0,0) grid (\textwidth,\textheight-1cm);
+\node[anchor = south east] at (\textwidth,0) {#2};
+
+\end{tikzpicture}
+\end{frame}
+}
+
 \newcommand{\source}[1]{\rotatebox{90}{\tiny \color{gray} #1}}
 
 
@@ -57,7 +72,7 @@
 \subtitle{Regelung im Zustandsraum}
 \author[R. Pfaff]{Prof. Dr. Raphael Pfaff}
 \institute[Dokument \docnum, \revision]{Fachhochschule Aachen}
-\logo{\put(-362, 0){\includegraphics[width=0.5cm]{logo.jpg}}}
+\logo{\put(-18, 120){\includegraphics[width=1.4cm]{logoR}}}
 
 \begin{frame} % Cover slide
 \titlepage
@@ -127,7 +142,7 @@
 }
 
 \section{Einf\"uhrung Zustandsraum}
-\frame{\sectionpage}
+%\frame{\sectionpage}
 \frame{\frametitle{Einf\"uhrung Zustandsraum \textit{(state space)}}
 \framesubtitle{Der Zustandsraum ist eine zunehmend an Bedeutung gewinnende Darstellung eines dynamischen Systems.}
 \begin{columns}[t] 
@@ -399,6 +414,43 @@
 		\end{equation}
  }
  
+\frame{\frametitle{Das Richtungsfeld einer DGL}
+\framesubtitle{}
+\begin{columns}[t] 
+     \begin{column}[T]{7cm} 
+     	\begin{itemize}
+     		\item DGL zweiten Grades bzw. System zweiter Ordnung
+		\item Zu jedem Punkt $(x_{1}, x_{2})^T$ l\"asst sich die Steigung $(\dot{x}_{1}, \dot{x}_{2})^T$ bestimmen:
+		\begin{equation*}
+		\left(
+		\begin{array}{c}
+		\dot{x}_{1}  \\
+		 \dot{x}_{2} 
+		\end{array}
+		\right) = 
+		%
+		\left(
+		\begin{array}{cc}
+		a_{12} & a_{12}  \\
+		 a_{21} & a_{22}
+		\end{array}
+		\right) 
+		%
+		\left( \begin{array}{c} {x}_{1}  \\	{x}_{2} \end{array} \right)
+		\end{equation*}
+		\item Mit dem Richtungsfeld l\"asst sich eine L\"osung graphisch bestimmen
+     	\end{itemize}
+     \end{column}
+     	\begin{column}[T]{7cm} 
+         	\begin{center}
+            		\only<1>{\includegraphics[width=\textwidth]{DirectionField}\source{}}
+		\only<2>{\includegraphics[width=\textwidth]{DirectionFieldSolution}\source{}}
+        		\end{center}
+     \end{column}
+ \end{columns}
+}
+ 
+ 
  \frame{\frametitle{Matrixexponential}
 \framesubtitle{Mittels des Matrixexponentials lassen sich lineare Differentialgleichungssystem (also Zustandsgleichungen) l\"osen.}
 \begin{itemize}
@@ -555,7 +607,7 @@ Es wird $\begin{pmatrix} C^T & (CA)^T & \cdots & \left(C A^{n-1}\right)^T \end{p
 %
 
 \section{Regelung im Zustandsraum}
-\frame{\sectionpage}
+%\frame{\sectionpage}
 %Zustandsregler
 \frame{\frametitle{Regelkreis mit Zustandsr\"uckf\"uhrung}
 \framesubtitle{}
@@ -611,7 +663,7 @@ y &=& C x
   
 }
 
-\section{Regelung im Zustandsraum}
+%\section{Regelung im Zustandsraum}
 %Zustandsregler
 \frame{\frametitle{Regelkreis mit Ausgangsr\"uckf\"uhrung}
 \framesubtitle{}
@@ -754,7 +806,7 @@ y &=& C x
 		\begin{itemize}
 		\item Minimale Varianz des Sch\"atzers
 		\end{itemize}
-		\item BLUE: Best Linear Unbiased Estimator
+		\item BLUE: Best Linear Unbiased Estimator (auch: optimales Filter)
      	\end{itemize}
      \end{column}
  \end{columns}
@@ -1181,8 +1233,6 @@ y_{k+1} & = &  C  {x}_{k+1} + r_{k+1}
 \end{itemize}
 }
 
-\section{Model predictive control}
-\offslide{Model predictive control}
 
 \begin{frame}[allowframebreaks]
 \frametitle{Literatur}
@@ -1217,7 +1267,7 @@ and the objective of the proof is to show that the right hand side of \eqref{Eq-
  = & \mathbf{1}
 \end{split}
 \end{displaymath}
-This proves the Matrix Inversion Lemma.
+This proofs the Matrix Inversion Lemma.
 }
 
 
