@@ -10,13 +10,18 @@ start = 25;
 % set up initial vectors
 n = 2;  % Numbers of parameters in A
 N = 200;   % Set the number of samples
-sigma = 3;  % Noise variance
+sigma = .3;  % Noise variance
 
 % Define the noise
 noise=randn(N,1); noise=sigma*(noise-mean(noise));
+
+% Input signals
 u=[-1*ones(start,1);ones(N-start,1)];
-u = sin(.1*(1:N));
+%u = sin(.1*(1:N));
+u = rand(1,N)-0.5;
+
 y=zeros(3,1);
+
 %	Create system ouput
 for t= 3:N,
     y(t,1) = -a1*y(t-1) - a2*y(t-2) + b0*u(t-1);
@@ -24,17 +29,19 @@ end
 y0 = y;
 y = y + noise;
 
-A = [0 -a2-0.1
+A = [0 -a2
     1 -a1];
 B = [0 b0]';
 C = [0 1]';
 
 % Set up the matrices and vectors for Kalman filter
 x = zeros(n,1);
-P = eye(n)*10000;
+P = eye(n)*1e-3;
 
 % Noise information
-rv = 1;  Rw = 0.01*eye(n); xSave=[];
+rv = 1;  Rw = 0.01*eye(n); 
+
+xSave=[];
 
 for t= 3:N
 %	Kalman filter

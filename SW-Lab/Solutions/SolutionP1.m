@@ -6,9 +6,9 @@ global A
 %% Task 1
 % System equations
 b = [1 3];
-a = [1 .5 1];
+a = [1 0 1];
 % Transfer function model to check
-systf = tf([1 3],[1 20 1])
+%systf = tf([1 3],[1 -.1 1])
 % Convert to state space
 [A,B,C,D] = tf2ss(b,a);
 
@@ -43,12 +43,12 @@ figure
 quiver(X1, X2, reshape(y(1,:), [res,res]), reshape(y(2,:), [res, res]));
 hold on
 plot(xtra(:,1), xtra(:,2))
-axis equal
+%axis equal
 
 %% Task 4
 % System parameters
 a0 = 1;
-a1 = 0.5;
+a1 = 5;
 b0 = 1;
 
 % Input signal
