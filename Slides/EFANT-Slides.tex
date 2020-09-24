@@ -20,7 +20,14 @@
 \usepackage[utf8]{inputenc}
 \usepackage{multimedia}
 \usepackage{xcolor}
+\usepackage{bm}
 \usetikzlibrary{arrows, decorations.markings}
+\usepackage{pgfplots}
+\usetikzlibrary{shapes.misc}
+\tikzset{cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},
+%default radius will be 1pt. 
+cross/.default={1pt}}
+
 \tikzstyle{vecArrow} = [thick, decoration={markings,mark=at position
    1 with {\arrow[semithick]{open triangle 60}}},
    double distance=1.4pt, shorten >= 5.5pt,
@@ -218,7 +225,39 @@
  \end{columns}
 }
 
-\offslide{Erarbeitung konzeptionelles Blockdiagramm}
+\frame{\frametitle{Blockdiagramm f\"ur SISO-System}
+\framesubtitle{}
+\begin{center}
+\begin{tikzpicture}[thick, node distance = 1.75cm]
+  \node[draw,rectangle] (i) {$\int$};
+   \node[draw, circle, left of=i] (l){};
+  \node[draw, rectangle, left of=l] (b){$\bm{B}$};
+  \node[draw,rectangle,below of=i] (a) {$\bm{A}$};
+  \node[draw,rectangle,above of=i] (d) {$\bm{D}$};
+      \node[inner sep=0,minimum size=0,right of=i] (k) {}; 
+        \node[draw,rectangle,right of=k] (c) {$\bm{C}$};
+    \node[inner sep=0,minimum size=0,left of=b] (p) {}; 
+    \node[inner sep=0,minimum size=0,left of=p] (o) {};
+   \node[draw, circle,right of=c] (m) {}; 
+   \node[inner sep=0,minimum size=0,right of=m] (q) {};
+  
+  % 1st pass: draw arrows
+  \draw[vecArrow] (i) -- (c) node[near start, above] {$\bm{x}(t)$};
+  \draw[vecArrow] (k) |- (a);
+  \draw[vecArrow] (a) -| (l);% node[pos = 0.95, right] {$+$};
+  \draw[vecArrow] (l) -- (i) node[midway, above] {$\dot{\bm{x}}(t)$};
+  \draw[vecArrow] (b) to (l); %node[pos = 0.95, below] {$+$};
+  \draw[thick, -stealth] (o) -- (b) node[pos = 0.25, above] {$u(t)$};
+   \draw[thick, -stealth] (p) |- (d);
+    \draw[thick, -stealth] (d) -| (m);
+       \draw[thick, -stealth] (c) -- (m);
+        \draw[thick, -stealth] (m) -- (q) node[pos = 0.5, above] {$y(t)$};
+  
+\end{tikzpicture}
+
+\end{center}
+}
+
 
 \frame{\frametitle{Vorteile/Nachteile Zustandsraumdarstellung}
 \framesubtitle{}
@@ -315,7 +354,7 @@
  \end{columns}
 }
 
-\offslide{Darstellung Regelungsnormalform im Blockdiagramm}
+%\offslide{Darstellung Regelungsnormalform im Blockdiagramm}
 
 \frame{\frametitle{Beobachtungsnormalform \textit{(observer canonical form)}}
 \begin{equation*}
@@ -488,7 +527,66 @@ die Differentialgleichung
 \end{itemize}
 }
 
-\offslide{Interpretation von Polstellen}
+\frame{\frametitle{Interpretation von Polstellen (zeitkontinuierliche Systeme)}
+\framesubtitle{}
+\begin{center}
+\begin{tikzpicture}[scale = .8]
+ \draw[ultra thick,-stealth] (-7,0) -- (3,0) node[pos = 0.95, above] {$\Re$};
+ \draw[ultra thick,-stealth] (0,-4) -- (0,5) node[pos = 0.95, right] {$\Im$};
+ \begin{scope}[xshift=-6cm, yshift = 0cm] 
+ \begin{axis}[thick, width=4cm, height = 4cm, yticklabels={}, xticklabels={}, axis x line=middle,
+    axis y line=middle,domain = 0:5,
+    axis background/.style={fill=white, opacity = 0.5}, anchor = center, ticks = none, axis line style={draw=gray, opacity = 0.7}, enlargelimits=true]
+         \addplot[no markers, smooth]  
+                  {exp(-5*x)};
+        \node at (rel axis cs:.5,.5) [cross = .2cm, ultra thick, gray] {};
+       \end{axis}
+       \end{scope}
+%\begin{scope}[xshift=5cm, yshift = 0cm] 
+% \begin{axis}[thick, width=4cm, height = 4cm, yticklabels={}, xticklabels={}, axis x line=middle,
+%    axis y line=middle,domain = 0:5,
+%    axis background/.style={fill=white, opacity = 0.5}, anchor = center, ticks = none, axis line style={draw=gray, opacity = 0.7}, enlargelimits=true]  
+%                  {exp(5*x)};
+%                   \node at (rel axis cs:.5,.5) [cross = .2cm, ultra thick, gray] {};
+%       \end{axis}
+%       \end{scope}
+      \begin{scope}[xshift=-.7cm, yshift = -2cm] 
+\begin{axis}[thick, width=4cm, height = 4cm, yticklabels={}, xticklabels={}, axis x line=middle,
+    axis y line=middle,domain = 0:5,
+    axis background/.style={fill=white, opacity = 0.5}, anchor = center, ticks = none, axis line style={draw=gray, opacity = 0.7}, enlargelimits=true]
+         \addplot[no markers, smooth, domain = 0:5]  
+                  {exp(-.7*x)*sin(2*deg(x))};
+                   \node at (rel axis cs:.5,.5) [cross = .2cm, ultra thick, gray] {};
+       \end{axis}
+      \end{scope}
+   
+    \begin{scope}[xshift=-3cm, yshift = 4cm] 
+\begin{axis}[thick, width=4cm, height = 4cm, yticklabels={}, xticklabels={}, axis x line=middle,
+    axis y line=middle,domain = 0:5,
+    axis background/.style={fill=white, opacity = 0.5}, anchor = center, ticks = none, axis line style={draw=gray, opacity = 0.7}, enlargelimits=true]
+         \addplot[no markers, smooth, domain = 0:5]  
+                  {exp(-3*x)*sin(4*deg(x))};
+                  \node at (rel axis cs:.5,.5) [cross = .2cm, ultra thick, gray] {};
+       \end{axis}
+      \end{scope}
+      
+      \begin{scope}[xshift=0cm, yshift = 2cm] 
+\begin{axis}[thick, width=4cm, height = 4cm, yticklabels={}, xticklabels={}, axis x line=middle,
+    axis y line=middle,domain = 0:5,
+    axis background/.style={fill=white, opacity = 0.5}, anchor = center, ticks = none, axis line style={draw=gray, opacity = 0.7}, enlargelimits=true]
+         \addplot[no markers, smooth, domain = 0:5]  
+                  {sin(2*deg(x))};
+                  \node at (rel axis cs:.5,.5) [cross = .2cm, ultra thick, gray] {};
+       \end{axis}
+      \end{scope}
+
+
+\end{tikzpicture}
+\end{center}
+}
+
+
+\offslide{Interpretation von Polstellen (zeitdiskrete Systeme)}
 
 \frame{\frametitle{Zustandssteuerbarkeit \textit{(state controllability)}}
 \framesubtitle{Zustandssteuerbarkeit bewertet, ob alle $x_{i}$ \"uber $u$ beeinflusst werden k\"onnen.}

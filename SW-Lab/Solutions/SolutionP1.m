@@ -6,7 +6,7 @@ global A
 %% Task 1
 % System equations
 b = [1 3];
-a = [1 0 1];
+a = [1 2 1];
 % Transfer function model to check
 %systf = tf([1 3],[1 -.1 1])
 % Convert to state space
